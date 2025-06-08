@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website | Mercy Wanjiru</title>
+    <style>
+        /* External CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        main {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+            padding: 30px 0;
+        }
+        
+        article {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        article h2 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-img {
+            height: 180px;
+            background-color: #1a2a6c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-content h3 {
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+        
+        aside {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+        
+        aside h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .related-articles ul {
+            list-style: none;
+        }
+        
+        .related-articles li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-articles a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .related-articles a:hover {
+            color: #1a2a6c;
+        }
+        
+        .form-container, .blog-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-container h2, .blog-container h2 {
+            color: #1a2a6c;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #1a2a6c;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 42, 108, 0.1);
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        button {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            font-weight: 600;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #f0f0f0;
+            margin: 0 auto 20px;
+            display: block;
+            background-color: #1a2a6c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .blog-content {
+            margin-bottom: 30px;
+        }
+        
+        .blog-content p {
+            margin-bottom: 15px;
+        }
+        
+        .css-examples {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #1a2a6c;
+        }
+        
+        .css-examples h4 {
+            margin-bottom: 15px;
+            color: #1a2a6c;
+        }
+        
+        .inline-example {
+            /* Inline CSS example */
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .embedded-example {
+            background-color: #e8f5e9;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        footer {
+            background: #1a2a6c;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 30px 0;
+            color: #1a2a6c;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #1a2a6c;
+            font-weight: 500;
+        }
+        
+        .back-btn i {
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i>📰</i>
+                    <span>NewsDaily</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('register')">Register</a></li>
+                    <li><a href="#" onclick="showSection('blog')">About Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="container">
+        <h1 class="section-title">Latest News</h1>
+        
+        <main>
+            <div>
+                <article>
+                    <h2>Breaking News</h2>
+                    <p>In a landmark decision today, world leaders have agreed on new climate change policies that aim to reduce carbon emissions by 50% before 2030. The agreement comes after two weeks of intense negotiations at the Global Climate Summit in Geneva.</p>
+                    <p>The new policies include significant investments in renewable energy, stricter regulations for industrial emissions, and international cooperation on developing sustainable technologies. Environmental activists have praised the agreement but emphasize that immediate action is crucial.</p>
+                </article>
+                
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-img">Technology Innovation</div>
+                        <div class="news-content">
+                            <h3>New AI Model Revolutionizes Healthcare</h3>
+                            <p>Researchers have developed an AI system that can detect early signs of diseases with 95% accuracy, potentially saving millions of lives through early intervention.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <div class="news-img">Sports Update</div>
+                        <div class="news-content">
+                            <h3>National Team Wins Championship</h3>
+                            <p>After a decade-long drought, our national football team has claimed the international championship title in a stunning victory against the defending champions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <div class="news-img">Economic Report</div>
+                        <div class="news-content">
+                            <h3>Economy Shows Strong Recovery Signs</h3>
+                            <p>Latest economic indicators suggest a robust recovery with unemployment at a 5-year low and consumer confidence at record highs since the pandemic.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <div class="news-img">Entertainment</div>
+                        <div class="news-content">
+                            <h3>Film Festival Announces Winners</h3>
+                            <p>The prestigious international film festival concluded last night with several groundbreaking independent films taking top honors in multiple categories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <aside>
+                <div class="related-articles">
+                    <h3>Related Articles</h3>
+                    <ul>
+                        <li><a href="#">Climate Change: What You Can Do</a></li>
+                        <li><a href="#">Renewable Energy Investments Soar</a></li>
+                        <li><a href="#">Interview with Lead Climate Scientist</a></li>
+                        <li><a href="#">Sustainable Cities of the Future</a></li>
+                        <li><a href="#">How Businesses Are Adapting</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section id="register" class="hidden container">
+        <a href="#" class="back-btn" onclick="showSection('home')"><i>←</i> Back to News</a>
+        <div class="form-container">
+            <h2>Registration Form</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="firstName">First Name <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <button type="submit">Register Now</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="hidden container">
+        <a href="#" class="back-btn" onclick="showSection('home')"><i>←</i> Back to News</a>
+        <div class="blog-container">
+            <div class="profile-header">
+                <div class="profile-img">Mercy W.</div>
+                <h2>Mercy Wanjiru: My Personal Journey</h2>
+            </div>
+            
+            <div class="blog-content">
+                <p>Hello and welcome to my personal space! I'm Mercy Wanjiru - a passionate part-time student, a dedicated professional, and a lifelong learner. My journey has been one of balancing multiple roles while pursuing excellence in everything I undertake.</p>
+                
+                <p>As a part-time student pursuing my degree in Computer Science, I've learned the art of time management and the value of perseverance. My academic journey has taught me that learning is not confined to classrooms; it happens every day through experiences, challenges, and interactions with diverse people.</p>
+                
+                <p>What defines me most is my passion for technology and innovation. I believe in the transformative power of digital solutions to address real-world problems. Whether I'm coding a new application, designing a user interface, or solving complex algorithms, I approach each task with enthusiasm and attention to detail.</p>
+                
+                <p>Beyond academics, I'm deeply involved in community tech initiatives where I volunteer to teach digital literacy skills to underprivileged youth. Seeing the spark of understanding in someone's eyes when they grasp a new concept is incredibly rewarding and fuels my passion for education.</p>
+                
+                <p>In my professional work as a junior developer, I bring creativity and precision to every project. I specialize in front-end development with a keen eye for design aesthetics and user experience. My colleagues describe me as a collaborative team player who brings positive energy to any project.</p>
+                
+                <p>When I'm not studying or working, you'll find me exploring nature trails, reading tech blogs, or experimenting with new recipes in the kitchen. I believe in maintaining a balanced life where personal growth, relationships, and self-care all have their place.</p>
+                
+                <p>Looking ahead, I aspire to leverage technology to create solutions that empower communities and bridge educational gaps. My personal brand is built on authenticity, continuous improvement, and making a meaningful impact wherever I go.</p>
+            </div>
+            
+            <div class="css-examples">
+                <h4>CSS Examples in This Project</h4>
+                
+                <div class="embedded-example">
+                    <p>This is an example of <strong>embedded CSS</strong> - all styles are defined in the &lt;style&gt; section in the document head.</p>
+                </div>
+                
+                <div style="background-color: #ffecb3; padding: 10px; border-radius: 4px; margin: 10px 0;">
+                    <p>This is an example of <strong>inline CSS</strong> - styles are applied directly to this element using the style attribute.</p>
+                </div>
+                
+                <div class="external-example">
+                    <p>This project uses <strong>external CSS</strong> principles - all styles are organized in a dedicated style section rather than inline or in separate files.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 NewsDaily | Created by Mercy Wanjiru</p>
+            <p>Part-time Student | Passionate Developer | Community Volunteer</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to show a specific section and hide others
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show the requested section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Handle form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Simple validation
+            if (firstName && lastName && email && phone) {
+                alert(`Thank you for registering, ${firstName} ${lastName}!\nWe've sent a confirmation to ${email}.`);
+                document.getElementById('registrationForm').reset();
+                showSection('home');
+            }
+        });
+        
+        // Initially show home section
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
